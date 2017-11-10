@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="QuakeInfo" representedClassName="QuakeInfo" syncable="YES">
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="magnitude" attributeType="Float" minValueString="0" maxValueString="15" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="title" attributeType="String" syncable="YES"/>
+        <relationship name="quakeLoc" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QuakeLoc" inverseName="quakeInfo" inverseEntity="QuakeLoc" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="title"/>
+                <constraint value="magnitude"/>
+                <constraint value="date"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="QuakeLoc" representedClassName="QuakeLoc" syncable="YES">
+        <attribute name="depth" attributeType="Float" minValueString="0" maxValueString="1000" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="latitude" attributeType="Double" minValueString="-90" maxValueString="90" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="location" attributeType="String" syncable="YES"/>
+        <attribute name="longitude" attributeType="Double" minValueString="-180" maxValueString="180" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="quakeInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QuakeInfo" inverseName="quakeLoc" inverseEntity="QuakeInfo" syncable="YES"/>
+        <relationship name="quakeWeb" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QuakeWeb" inverseName="quakeLoc" inverseEntity="QuakeWeb" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="depth"/>
+                <constraint value="latitude"/>
+                <constraint value="location"/>
+                <constraint value="longitude"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="QuakeWeb" representedClassName="QuakeWeb" syncable="YES">
+        <attribute name="link" attributeType="String" syncable="YES"/>
+        <relationship name="quakeLoc" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="QuakeLoc" inverseName="quakeWeb" inverseEntity="QuakeLoc" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="link"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <elements>
+        <element name="QuakeInfo" positionX="-72" positionY="-76" width="128" height="103"/>
+        <element name="QuakeLoc" positionX="106" positionY="-90" width="128" height="133"/>
+        <element name="QuakeWeb" positionX="270" positionY="-90" width="128" height="73"/>
+    </elements>
+</model>
